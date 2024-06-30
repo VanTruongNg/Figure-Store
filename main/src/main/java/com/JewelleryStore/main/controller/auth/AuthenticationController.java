@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
@@ -25,8 +24,21 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationDTO> register (@RequestBody User request) {
-        return ResponseEntity.ok(authenticationService.register(request));
+    public ResponseEntity<LoginDTO> register (@RequestBody User request) {
+        AuthenticationDTO authenticationDTO = authenticationService.register(request);
+
+        if (authenticationDTO.getToken() == null) {
+            return ResponseEntity.badRequest().body(new LoginDTO(null, null));
+        }
+
+        Optional<User> user = userService.findByEmail(request.getEmail());
+
+        if (!user.isPresent()) {
+            return ResponseEntity.badRequest().body(new LoginDTO(null, null)); // Hoặc xử lý lỗi khác nếu cần thiết
+        }
+
+        LoginDTO loginDTO = new LoginDTO(authenticationDTO, user.get());
+        return ResponseEntity.ok(loginDTO);
     }
 
     @PostMapping("/login")

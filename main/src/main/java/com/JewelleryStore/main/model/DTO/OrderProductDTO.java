@@ -8,7 +8,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderProductDTO {
+public class  OrderProductDTO {
     private UUID productId;
     private int quantity;
 }

@@ -22,12 +22,10 @@ import java.util.UUID;
 public class ProductCategogryController {
 
     private final ProductCategoryService productCategoryService;
-    private final FileStorageService fileStorageService;
 
     @Autowired
-    public ProductCategogryController (ProductCategoryService productCategoryService, FileStorageService fileStorageService) {
+    public ProductCategogryController (ProductCategoryService productCategoryService) {
         this.productCategoryService = productCategoryService;
-        this.fileStorageService = fileStorageService;
     }
 
     @GetMapping
