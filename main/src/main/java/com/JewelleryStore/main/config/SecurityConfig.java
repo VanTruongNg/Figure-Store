@@ -41,6 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         req->req.requestMatchers("/api/v1/user/**" ,"/api/v1/auth/**", "/images/**")
                                 .permitAll()
+                                .requestMatchers("api/v1/account/**").hasAnyAuthority("ADMIN", "USER")
                                 .requestMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
                                 .requestMatchers("/api/v1/user/cart/**", "/api/v1/user/orders/**").hasAnyAuthority("USER")
                                 .anyRequest()
