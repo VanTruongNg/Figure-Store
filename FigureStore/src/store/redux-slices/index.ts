@@ -1,0 +1,6 @@
+export * from "./HomeSlice"
+export * from "./CartSlice"
+export * from "./AuthSlice"
+export * from "./WebCartSlice"
+export * from "./UserSlice"
+export * from "./OrderSlice"
