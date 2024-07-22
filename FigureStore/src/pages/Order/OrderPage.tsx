@@ -44,6 +44,12 @@ const OrderPage = () => {
     switch (status) {
       case "PENDING":
         return "Chờ xác nhận";
+      case "SHIPPED":
+        return "Đơn hàng đang vận chuyển";
+      case "DELIVERED":
+        return "Đơn hàng đã được giao";
+      case "CANCELED":
+        return "Đã bị huỷ";
       default:
         return status;
     }

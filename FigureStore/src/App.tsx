@@ -35,6 +35,7 @@ import UserRoute from "./routes/UserRoute";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import OrderPage from "./pages/Order/OrderPage";
 import ProductAdmin from "./pages/AdminDashboard/Dashboard/components/ProductsAdmin/ProductAdmin";
+import CategoryAdmin from "./pages/AdminDashboard/Dashboard/components/CategoriesAdmin/CategoriesAdmin";
 
 const Layout = () => {
   return (
@@ -78,8 +79,22 @@ const router = createBrowserRouter(
             </UserRoute>
           }
         />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/order" element={<OrderPage />} />
+        <Route
+          path="/checkout"
+          element={
+            <UserRoute>
+              <CheckoutPage />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            <UserRoute>
+              <OrderPage />
+            </UserRoute>
+          }
+        />
       </Route>
 
       <Route
@@ -92,6 +107,7 @@ const router = createBrowserRouter(
       >
         <Route path="/dashboard/products" element={<ProductAdmin />} />
         <Route path="/dashboard/orders" element={<OrderAdmin />} />
+        <Route path="/dashboard/categories" element={<CategoryAdmin />} />
       </Route>
 
       <Route path="/access-denied" element={<Cube />} />

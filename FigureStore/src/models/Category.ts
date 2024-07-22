@@ -3,3 +3,8 @@ interface Category {
     name: string;
     products: Product[];
 }
+
+export interface CategoryDTO {
+    id: string;
+    name: string
+}

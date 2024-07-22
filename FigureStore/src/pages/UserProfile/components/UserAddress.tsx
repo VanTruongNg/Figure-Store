@@ -78,7 +78,6 @@ const AddressTable = ({ defaultAddress }: AddressTableProps) => {
       return;
     }
 
-    // Xoá địa chỉ nếu không phải là địa chỉ mặc định
     dispatch(deleteAddress(id)).then(() => {
       toast.success("Xoá địa chỉ thành công");
     });

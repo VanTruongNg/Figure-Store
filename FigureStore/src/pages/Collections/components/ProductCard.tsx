@@ -11,9 +11,11 @@ import {
   putUpdateQantity,
 } from "../../../store/redux-thunk/CartThunk";
 import { toast } from "react-toastify";
+import ProductDetailsModal from "../../ProductDetails/ProductDetailsModal";
 
-const ProductCard = ({ item, navigate }: any) => {
+const ProductCard = ({ item }: any) => {
   const [hovered, setHovered] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   const productName = item.name;
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -24,14 +26,8 @@ const ProductCard = ({ item, navigate }: any) => {
     return String(name).toLowerCase().split(" ").join("-");
   };
 
-  const root = nameString(productName);
-
   const handleProductsDetails = () => {
-    navigate(`/product/${root}`, {
-      state: {
-        item: item,
-      },
-    });
+    setModalOpen(true);
   };
 
   const handleAddToCart = () => {
@@ -138,6 +134,11 @@ const ProductCard = ({ item, navigate }: any) => {
           </div>
         </div>
       </div>
+      <ProductDetailsModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        item={item}
+      />
     </div>
   );
 };

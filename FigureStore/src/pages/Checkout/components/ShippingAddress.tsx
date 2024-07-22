@@ -1,4 +1,3 @@
-// src/components/Checkout/ShippingAddress.js
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -11,7 +10,10 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../common/redux";
-import { getUserAddress } from "../../../store/redux-thunk/UserThunk";
+import {
+  getUserAddress,
+  patchSetDefaultAddress,
+} from "../../../store/redux-thunk/UserThunk"; // Import thunk action
 import { toast } from "react-toastify";
 
 const ShippingAddress = ({
@@ -28,8 +30,18 @@ const ShippingAddress = ({
     dispatch(getUserAddress());
   }, [dispatch]);
 
-  const handleAddressChange = (event: any) => {
-    setSelectedAddress(event.target.value);
+  const handleAddressChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    const addressId = event.target.value as string;
+    setSelectedAddress(addressId);
+    handleSetDefault(addressId);
+  };
+
+  const handleSetDefault = (addressId: any) => {
+    dispatch(patchSetDefaultAddress(addressId)).then(() => {
+      dispatch(getUserAddress());
+    });
   };
 
   const handleNextStep = () => {

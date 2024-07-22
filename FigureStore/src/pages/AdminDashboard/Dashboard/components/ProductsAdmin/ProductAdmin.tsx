@@ -27,7 +27,12 @@ import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { useAppDispatch, useAppSelector } from "../../../../../common/redux";
 import { getProducts } from "../../../../../store/redux-thunk";
-import { deleteProduct, postAddImage, postAddProduct, putUpdateProduct } from "../../../../../store/redux-thunk/ProductThunk";
+import {
+  deleteProduct,
+  postAddImage,
+  postAddProduct,
+  putUpdateProduct,
+} from "../../../../../store/redux-thunk/ProductThunk";
 import { formatPrice } from "../../../../../utils";
 import { webLogo } from "../../../../../assets";
 
@@ -182,6 +187,7 @@ const ProductAdmin = () => {
                 <TableCell>Name</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Description</TableCell>
+                <TableCell>Danh mục</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -206,6 +212,7 @@ const ProductAdmin = () => {
                   <TableCell>{product.name}</TableCell>
                   <TableCell>{formatPrice(product.price)}</TableCell>
                   <TableCell>{product.description}</TableCell>
+                  <TableCell>{product.category[0].name}</TableCell>
                   <TableCell>
                     <IconButton
                       color="primary"
@@ -315,7 +322,6 @@ const ProductAdmin = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      {/* Add/Edit product modal */}
       <Dialog open={modalOpen} onClose={closeModal}>
         <DialogTitle>{editMode ? "Edit Product" : "Add Product"}</DialogTitle>
         <DialogContent>

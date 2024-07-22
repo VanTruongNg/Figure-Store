@@ -7,6 +7,11 @@ import {
   postAddProduct,
   putUpdateProduct,
 } from "../redux-thunk/ProductThunk";
+import {
+  deleteCategory,
+  postAddCategory,
+  putUpdateCategory,
+} from "../redux-thunk/CategoryThunk";
 
 interface HomeState {
   products: Product[];
@@ -72,6 +77,22 @@ const HomeSlice = createSlice({
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       state.products = state.products.filter(
         (product) => product.id === action.payload
+      );
+    });
+    builder.addCase(postAddCategory.fulfilled, (state, action) => {
+      state.categories.push(action.payload);
+    });
+    builder.addCase(putUpdateCategory.fulfilled, (state, action) => {
+      const index = state.categories.findIndex(
+        (categories: any) => categories.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.categories[index] = action.payload;
+      }
+    });
+    builder.addCase(deleteCategory.fulfilled, (state, action) => {
+      state.categories = state.categories.filter(
+        (categories: any) => categories.id !== action.payload
       );
     });
   },
